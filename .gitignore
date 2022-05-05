@@ -1,0 +1,9 @@
+*.tfrecord
+experiments/reference/**
+experiments/pretrained_model/**
+experiments/reference/**
+experiments/experiment0/**
+experiments/experiment1/**
+.Trash-0/**
+*.gif
+*.gz
