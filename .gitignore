@@ -8,5 +8,5 @@ experiments/experiment1/**
 *.gif
 *.gz
 !experiments/**/*.svg
-!experiments/**/*.config
+!experiments/*/*.config
 !experiments/**/**/*.svg
