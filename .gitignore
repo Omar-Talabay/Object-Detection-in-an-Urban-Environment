@@ -7,3 +7,6 @@ experiments/experiment1/**
 .Trash-0/**
 *.gif
 *.gz
+!experiments/**/*.svg
+!experiments/**/*.config
+!experiments/**/**/*.svg
