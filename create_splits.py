@@ -22,14 +22,14 @@ def split(data_dir):
     
     data_fnames = glob.glob(data_dir + os.sep + 'training_and_validation' + os.sep + '*.tfrecord')
     
-    # ======
+    # ====== create train & val folders =======
     train_data_dir = data_dir + os.sep + 'train'
     val_data_dir = data_dir + os.sep + 'val'
     
     os.makedirs(train_data_dir, exist_ok=True)
     os.makedirs(val_data_dir, exist_ok=True)
     
-    # ======== split data ==============
+    # ======== split data 80% for training and 20% for validation set ==============
     random.shuffle(data_fnames)
     train_proportion = int(len(data_fnames) * .8)
     train_fnames = data_fnames[0: train_proportion]
