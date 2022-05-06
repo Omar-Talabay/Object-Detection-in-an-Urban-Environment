@@ -215,7 +215,7 @@ In order to optimize the performance, 2 experiments were conducted. First, addin
 Bellow is the loss for reference experiment:
 
 ![Alt text](./final_results/Loss_total_loss_0.svg)
-<img src="./final_results/Loss_total_loss_0.svg">
+<img src="./final_results/Loss_total_loss_0.svg" width="200" height="200">
 
 
 Note: different runs show different loss values. High loss values are the common factor which means the training is unstable.
