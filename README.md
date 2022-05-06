@@ -141,20 +141,59 @@ python inference_video.py --labelmap_path label_map.pbtxt --model_path experimen
 ## Submission Template
 
 ### Project overview
-This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
+One of the essential tasks in self-driving cars is how to percieve real world via cameras. In this project, Tensorflow object detection API is used. The goal of this project is as follows:
+* Explore and visualize image data stored as tf-record.
+* Prepare and split data for train and validation.
+* Train a base model object detection.
+* Train with data augmentation.
+* Train with changing different learning rates.
+* Monitor training progress.
+* Evaluate the training results.
+* Export the model for inference.
 
 ### Set up
-This section should contain a brief description of the steps to follow to run the code for this repository.
+First of all, these experments are done in Udacity workspace. Therefore, the packages used are listed in the requirements.txt file. 
+To run the experements, There six components I will explain as follows.
+
+First step: Exploratory Data Analysis.ipynb
+* At the beginning, the data were located at data/waymo/training_and_validation
+* Running this notebook is strait forward. Just making sure a correct folder path to tf records is set.
+
+Second step: create_splits.py
+This script assumes the tf records are stored under 'training_and_validation'  directory. 
+To run the code correctly, passing the parent directory of this folder is reqired, i.e.:
+python create_splits.py ./data/waymo
+
+Third step:
+* config files: under the folder expirements, three config files generated under experement0, experement1, and experement2
+
+to run the first experement:
+
+python experiments/model_main_tf2.py --model_dir=./experiments/experiment0/ --pipeline_config_path=./experiments/experiment0/pipeline_new.config
+
+to monitor the first experiment:
+
+python -m tensorboard.main --logdir experiments/experiment0/
+
+to evaluate the first experiment:
+
+python experiments/model_main_tf2.py --model_dir=experiments/experiment0/ --pipeline_config_path=experiments/experiment0/pipeline_new.config --checkpoint_dir=experiments/experiment0/
+
+for the other experiments, the number 0 in 'experiment0' needs to be replaced by 1 or 2.
+
+
 
 ### Dataset
 #### Dataset analysis
-This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
+This data set contains images stored in 97 tf records. There are three classes avaialbe, pedestrians, cars, and cyclists. It has different challenging characterestics that affect the performance. First, class imbalance, the number of cars is way much more than pedestrian and cyclists. Second, outdoor condition like sun, fog, etc makes the data with high variablility. Finally, small objects sizes which makes adverse effect on the performance of object detections.
 #### Cross validation
-This section should detail the cross validation strategy and justify your approach.
+The dataset was split into training and validation sets with a percentage of 80% and 20% respectivly. The reason for that is to use as much training data as possible to reduce the effect of high variability in the data.
 
 ### Training
 #### Reference experiment
-This section should detail the results of the reference experiment. It should includes training metrics and a detailed explanation of the algorithm's performances.
+The results of the reference on training was very high, 51.237. This potintially makes the model useless. After evaluation on validation set, no predictions were found. The observation here is that there is high fluctionations in the loss during training and this could be caused by the high learning rate.
+
+In order to optimize the performance, 2 experiments were conducted. First, adding data augmentation. Second, chaning the learning rate.
 
 #### Improve on the reference
 This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
