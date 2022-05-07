@@ -137,7 +137,7 @@ Finally, you can create a video of your model's inferences for any tf record fil
 ```
 python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path /data/waymo/testing/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
 ```
-
+```
 ## Submission Template
 
 ### Project overview
@@ -165,6 +165,8 @@ To run the code correctly, passing the parent directory of this folder is reqire
 python create_splits.py ./data/waymo
 
 Third step:
+* Downloading the pretrained model from http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz and unzip it to ./experiments/pretrained_model/
+
 * config files: under the folder expirements, three config files generated under experement0, experement1, and experement2
 
 to run the first experement:
@@ -179,7 +181,22 @@ to evaluate the first experiment:
 
 python experiments/model_main_tf2.py --model_dir=experiments/experiment0/ --pipeline_config_path=experiments/experiment0/pipeline_new.config --checkpoint_dir=experiments/experiment0/
 
+
+to export the model for inference:
+
+python experiments/exporter_main_v2.py --input_type image_tensor --pipeline_config_path experiments/experiment0/pipeline_new.config --trained_checkpoint_dir experiments/experiment0/ --output_directory experiments/experiment0/exported/
+
+to run inference for testing:
+
+python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/experiment0/exported/saved_model --tf_record_path ./data/waymo/test/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/experiment0/pipeline_new.config --output_path animation.gif
+
+Due to limited space in the student workspace, models need to be deleted to run different experiments. To delete models files from experiment 0:
+find ./experiments/experiment0/ -name "ck*" -exec rm {} \;
+
+
+
 for the other experiments, the number 0 in 'experiment0' needs to be replaced by 1 or 2.
+
 
 
 
@@ -194,6 +211,15 @@ The dataset was split into training and validation sets with a percentage of 80%
 The results of the reference on training was very high, 51.237. This potintially makes the model useless. After evaluation on validation set, no predictions were found. The observation here is that there is high fluctionations in the loss during training and this could be caused by the high learning rate.
 
 In order to optimize the performance, 2 experiments were conducted. First, adding data augmentation. Second, chaning the learning rate.
+
+Bellow is the loss for reference experiment:
+
+![Alt text](./final_results/Loss_total_loss_0.svg)
+<img src="./final_results/Loss_total_loss_0.svg" width="200" height="200">
+
+
+Note: different runs show different loss values. High loss values are the common factor which means the training is unstable.
+
 
 #### Improve on the reference
 This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
