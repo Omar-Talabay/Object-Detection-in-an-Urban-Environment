@@ -4,6 +4,7 @@ experiments/pretrained_model/**
 experiments/reference/**
 experiments/experiment0/**
 experiments/experiment1/**
+experiments/experiment2/**
 .Trash-0/**
 *.gif
 *.gz
