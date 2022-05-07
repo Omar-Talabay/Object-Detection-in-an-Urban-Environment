@@ -7,7 +7,7 @@ experiments/experiment1/**
 experiments/experiment2/**
 .Trash-0/**
 *.gif
-!./animation_experiment_1.gif
+!animation_experiment_1.gif
 *.gz
 !experiments/**/*.svg
 !experiments/*/*.config
