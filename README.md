@@ -95,6 +95,12 @@ These techniques helps to increase data variablity and help the model to general
 * random_distort_color
 * random_crop_image
 
-2.6
+the final training loss value achieved is 2.6 which shows a significant improvements from the first experiment. The following figure shows the training progress
 
+<img src="./final_results/Loss_total_loss_1.svg" width="500" height="300">
+
+
+
+
+1.262
 
