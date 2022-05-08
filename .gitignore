@@ -10,6 +10,7 @@ experiments/experiment2/**
 !animation_experiment_1.gif
 !animation_experiment_2.gif
 !animation_experiment_3.gif
+
 *.gz
 !experiments/**/*.svg
 !experiments/*/*.config
