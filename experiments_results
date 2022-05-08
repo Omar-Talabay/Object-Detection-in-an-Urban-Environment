@@ -1,6 +1,5 @@
-0:
-INFO:tensorflow:Step 2500 per-step time 1.023s loss=6.651
-I0508 05:47:12.281190 140460693194560 model_lib_v2.py:682] Step 2500 per-step time 1.023s loss=6.651
+experiment 0:
+train loss loss=6.651
 
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.000
  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.000
@@ -18,8 +17,8 @@ I0508 05:47:12.281190 140460693194560 model_lib_v2.py:682] Step 2500 per-step ti
 
 ==========================================
 
-1:
-I0508 09:33:59.372372 140027961321280 model_lib_v2.py:682] Step 2500 per-step time 1.011s loss=2.007
+experiment 1:
+train loss=2.007
 
 
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.000
@@ -38,8 +37,8 @@ I0508 09:33:59.372372 140027961321280 model_lib_v2.py:682] Step 2500 per-step ti
 val loss: 1.882
 ============================
 
-2:
-INFO:tensorflow:Step 2500 per-step time 1.061s loss=0.768
+experiment 2:
+train loss=0.768
 
  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.151
  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.313
@@ -55,19 +54,6 @@ INFO:tensorflow:Step 2500 per-step time 1.061s loss=0.768
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.627
 
 val loss: 0.882389
-
-python experiments/model_main_tf2.py --model_dir=experiments/experiment0/ --pipeline_config_path=experiments/experiment0/pipeline_new.config --checkpoint_dir=experiments/experiment0/  --eval_timeout 10
-
-python experiments/exporter_main_v2.py --input_type image_tensor --pipeline_config_path experiments/experiment2/pipeline_new.config --trained_checkpoint_dir experiments/experiment2/ --output_directory experiments/experiment2/exported/
-
-
-python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/experiment2/exported/saved_model --tf_record_path ./data/waymo/test/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/experiment2/pipeline_new.config --output_path animation_1.gif
-
-python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/experiment2/exported/saved_model --tf_record_path ./data/waymo/test/segment-10072231702153043603_5725_000_5745_000_with_camera_labels.tfrecord --config_path experiments/experiment2/pipeline_new.config --output_path animation_2.gif
-
-python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/experiment2/exported/saved_model --tf_record_path ./data/waymo/test/segment-12012663867578114640_820_000_840_000_with_camera_labels.tfrecord --config_path experiments/experiment2/pipeline_new.config --output_path animation_3.gif
-
-
 
 
 
