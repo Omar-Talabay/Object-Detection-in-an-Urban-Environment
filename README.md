@@ -12,7 +12,7 @@ One of the essential tasks in self-driving cars is how to percieve real world vi
 
 ### Set up
 First of all, these experments are done in Udacity workspace. Therefore, the packages used are listed in the requirements.txt file. 
-To run the experements, There six components I will explain as follows.
+To run the experements, There different components I will explain as follows.
 
 First step: Exploratory Data Analysis.ipynb
 * At the beginning, the data were located at data/waymo/training_and_validation
@@ -68,9 +68,9 @@ The dataset was split into training and validation sets with a percentage of 80%
 
 ### Training
 #### Reference experiment
-The results of the reference on training was very high, 19.82. This potintially makes the model underfit. After evaluation on validation set, poor mAp was acheived. The observation here is that there is high fluctionations in the loss during training and this could be caused by the high learning rate.
+The results of the reference on training was very high, 19.82. After evaluation on validation set, poor mAp was acheived. The observation here is that there is high fluctionations in the loss during training and this could be caused by the high learning rate.
 
-In order to optimize the performance, 2 experiments were conducted. First, lowring the learning rate. Second, using data augmentation.
+In order to optimize the performance, 2 experiments were conducted. First, reducing the learning rate. Second, using data augmentation.
 
 Bellow is the loss for reference experiment:
 
@@ -89,7 +89,7 @@ The final training total loss value is .909 which shows a significant improvemen
 The following figure shows the training progress:
 <img src="./final_results/Loss_total_loss_1.svg" width="500" height="300">
 
-The validation loss value is 0.846422. Since the the validation loss is marginally lower than training, This a sign of underfil model.
+The validation loss value is 0.846422.
 
 Data Augmentation:
 The last experiment is based on the same configuration of the first one except that data augmentation techniques were added to the configuration file.
@@ -99,12 +99,13 @@ These techniques helps to increase data variablity and help the model to general
 * random_adjust_contrast
 * random_adjust_hue
 
-the final training loss value achieved is 0.768 which shows a significant improvements from the second experiment. The following figure shows the training progress
+the final training loss value achieved is 0.640 which shows a significant improvements from the second experiment. The following figure shows the training progress
 
 <img src="./final_results/Loss_total_loss_2.svg" width="500" height="300">
 
+It can be noticed from figure above, the training loss is highly fluctuating compared to experiment 1 even though the have the same learning rate. This in fact attributed to the data augmentation which adds extra variablity to train data.
 
-The validation loss value is 0.882389 
+The validation loss value is 0.858350 
 
 
 The table bellow shows the total precision/recall when IOU=.75
@@ -112,8 +113,19 @@ The table bellow shows the total precision/recall when IOU=.75
 Experiment # | Precision | Recall 
 ------------ | --------- | ------
 0            | 0         | 004
-1            | 0.131     | 0.122
-2            | 0.125     | 0.233
+1            | 0.131     | 0.238
+2            | 0.129     | 0.231
+
+The table bellow shows the total loss values for training and validation:
+
+Experiment # | Train     | Val 
+------------ | --------- | ------
+0            | 19.82     | 20.326397
+1            | 0.909     | 0.846422
+2            | 0.640     | 0.858350
+
+
+The train loss value in experiment 2 is lower than the first 1. Experiment 1 is slightly better on validation, however. 
 
 The experiments detailed evaluations can be found at the file "experiments_results" on this repo.
 
