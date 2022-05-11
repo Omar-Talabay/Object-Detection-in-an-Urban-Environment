@@ -68,7 +68,7 @@ The dataset was split into training and validation sets with a percentage of 80%
 
 ### Training
 #### Reference experiment
-The results of the reference on training was very high, 6.651. This potintially makes the model useless. After evaluation on validation set, poor mAp were acheived. The observation here is that there is high fluctionations in the loss during training and this could be caused by the high learning rate.
+The results of the reference on training was very high, 19.82. This potintially makes the model underfit. After evaluation on validation set, poor mAp was acheived. The observation here is that there is high fluctionations in the loss during training and this could be caused by the high learning rate.
 
 In order to optimize the performance, 2 experiments were conducted. First, lowring the learning rate. Second, using data augmentation.
 
@@ -83,20 +83,17 @@ Note: different runs show different loss values. High loss values are the common
 
 #### Improve on the reference
 Learning rate:
-The default learning rate was .04 which is relatively high as observed from the reference model. As a result, a learning rate of .004 was used.
-The final total loss value is 2.007 which shows a significant improvement from the previous experiment. 
+The default learning rate was .04 which is relatively high as observed from the reference model. As a result, a learning rate of .0004 was used.
+The final training total loss value is .909 which shows a significant improvement from the previous experiment. 
 
 The following figure shows the training progress:
 <img src="./final_results/Loss_total_loss_1.svg" width="500" height="300">
 
-The validation loss value is 1.882. Even thoudh there is a significant improvement, the model has very low precision/recall results. Also the model was tested on test set, no vehicle detection were found.
+The validation loss value is 0.846422. Since the the validation loss is marginally lower than training, This a sign of underfil model.
 
 Data Augmentation:
 The last experiment is based on the same configuration of the first one except that data augmentation techniques were added to the configuration file.
 These techniques helps to increase data variablity and help the model to generalize well on unseen images. Here are what data augmentation techniques used in this experiment:
-* random_horizontal_flip
-* random_vertical_flip
-* random_rotation90
 * random_rgb_to_gray
 * random_adjust_brightness
 * random_adjust_contrast
@@ -114,8 +111,8 @@ The table bellow shows the total precision/recall when IOU=.75
 
 Experiment # | Precision | Recall 
 ------------ | --------- | ------
-0            | 0         | 0
-1            | 0         | 0.010
+0            | 0         | 004
+1            | 0.131     | 0.122
 2            | 0.125     | 0.233
 
 The experiments detailed evaluations can be found at the file "experiments_results" on this repo.
